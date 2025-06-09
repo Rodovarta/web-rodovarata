@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Взаємопідтримка | Родоварта</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 40px 20px;
+    }
+    h2 {
+      font-size: 2em;
+      color: #0056b3;
+      margin-bottom: 20px;
+    }
+    details {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Родоварта | Взаємопідтримка</h1>
+    <p>Твори добро — об'єднуй серця</p>
+  </header>
+
+  <nav>
+    <a href="https://rodovarta.github.io/web-rodovarata/02_pro_fond.html">Про фонд</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/03_proekti.html">Проєкти</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/04_oholoshennya.html">Оголошення</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/05_vzaemopidtrymka.html">Взаємопідтримка</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/06_miy%20prophil.html">Вхід</a>
+  </nav>
+
+  <main>
+    <h2>🤝 Взаємопідтримка</h2>
+
+    <details open>
+    <summary>🎁 Подарую</summary>
+    <ul>
+      <li><a href="#" onclick="showSection('mine', this)">Переглянути свої пропозиції</a></li>
+      <li><a href="#" onclick="showSection('incoming', this)">Відгукнутись на наявні пропозиції</a></li>
+      
+      
+    </ul>
+    <div id="giftSection">
+      <div id="giftSection-mine"></div>
+      <div id="giftSection-incoming" style="display:none;"></div>
+    </div>
+      <div id="giftSection-incoming" style="display:none;"></div>
+      <div id="giftSection-confirm" style="display:none;"></div>
+    </div>
+  </details>
+
+    <details open>
+    <summary>🔁 Обміни / Бартер</summary>
+    <ul>
+      <li><a href="#" onclick="showSection('mine', this)">Переглянути свої пропозиції</a></li>
+      <li><a href="#" onclick="showSection('incoming', this)">Відгукнутись на наявні пропозиції</a></li> 
+    </ul>
+    <div id="barterSection"></div>
+  </details>
+
+    <details open>
+    <summary>💸 Розрахунки</summary>
+    <ul>
+      <li><a href="#" onclick="showSection('mine', this)">Переглянути свої пропозиції</a></li>
+      <li><a href="#" onclick="showSection('incoming', this)">Відгукнутись на наявні пропозиції</a></li>    
+    </ul>
+    <div id="saleSection"></div>
+  </details>
+
+<script>
+    function showSection(type, link) {
+      const parent = link.closest('details');
+      const baseId = parent.querySelector('div[id$="Section"]').id.replace(/Section.*/, 'Section');
+      ['mine', 'incoming', 'confirm'].forEach(t => {
+        const sec = document.getElementById(`${baseId}-${t}`);
+        if (sec) sec.style.display = (t === type) ? 'block' : 'none';
+      });
+    }
+    // Демо-дані оголошень
+    const userAds = [
+      { title: 'Дитяча коляска', category: '👶 Для дітей', exchangeType: 'gift', exchangeCondition: 'free', description: 'Майже нова', createdAt: '2025-06-09' },
+      { title: 'Настільна лампа', category: '📱 Техніка', exchangeType: 'sale', exchangeCondition: 'money', description: 'LED лампа, хороша', createdAt: '2025-06-08' },
+      { title: 'Рюкзак туристичний', category: '🏕️ Туризм', exchangeType: 'swap', exchangeCondition: 'barter', description: 'Для походів', createdAt: '2025-06-07' }
+    ];
+
+    function renderFiltered(sectionId, conditionFn) {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+      section.innerHTML = '';
+      const filtered = userAds.filter(conditionFn);
+      if (!filtered.length) {
+        section.innerHTML = '<p style="color: gray;">Немає оголошень</p>';
+        return;
+      }
+      filtered.forEach(ad => {
+        const card = document.createElement('div');
+        card.className = 'ad-card';
+        card.innerHTML = `
+          <details>
+            <summary><strong>${ad.title}</strong></summary>
+            <p><strong>📂 Категорія:</strong> ${ad.category}</p>
+            <p><strong>🔁 Обмін:</strong> ${ad.exchangeType}</p>
+            <p><strong>📌 Умови:</strong> ${ad.exchangeCondition}</p>
+            <p><strong>📝 Опис:</strong> ${ad.description}</p>
+            <p><small>📅 ${ad.createdAt}</small></p>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap: wrap;">
+              <button onclick="confirmAction('Редагувати')">✏️ Редагувати</button>
+              <button>📤 Поділитись</button>
+              <button onclick="confirmAction('Видалити')">🗑️ Видалити</button>
+              <button>💬 Написати автору</button>
+              <button onclick="confirmAction('Підтвердити')">✅ Підтвердити</button>
+              <button onclick="confirmAction('Скасувати')">❌ Скасувати</button>
+            </div>
+          </details>`;
+        section.appendChild(card);
+      });
+    }
+
+    renderFiltered("giftSection-mine", ad => ad.exchangeType === "gift" && ad.title.includes('коляска'))
+    renderFiltered("giftSection-incoming", ad => ad.exchangeType === "gift" && ad.title.includes('лампа'))
+    renderFiltered("giftSection-confirm", ad => ad.exchangeType === "gift" && ad.title.includes('підтвердження'))
+    renderFiltered("barterSection", ad => ad.exchangeType === "swap");
+    renderFiltered("saleSection", ad => ad.exchangeType === "sale");
+  function confirmAction(action) {
+      if (confirm(`Ви впевнені, що хочете: ${action}?`)) {
+        alert(`${action} виконано.`);
+      }
+    }
+  </script>
+
+    <details>
+      <summary>🌟 Перерахунок Благочестя</summary>
+      <form id="blagoForm" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
+  <label>🔑 ID відправника:
+    <input type="text" name="senderId" required style="width: 100%; padding: 8px;">
+  </label>
+  <label>🎯 ID отримувача:
+    <input type="text" name="receiverId" required style="width: 100%; padding: 8px;">
+  </label>
+  <label>💰 Сума:
+    <input type="text" name="amount" required pattern="\d+(\.|,)?\d*" style="width: 100%; padding: 8px;">
+  </label>
+  <label>📝 Коментар:
+    <textarea name="comment" rows="2" style="width: 100%; padding: 8px;"></textarea>
+  </label>
+  <div style="display: flex; gap: 10px;">
+    <button type="button" onclick="confirmBlago('cancel')" style="background: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 5px;">❌ Скасувати</button>
+    <button type="submit" style="background: #28a745; color: white; padding: 8px 12px; border: none; border-radius: 5px;">✅ Підтвердити</button>
+  </div>
+</form>
+
+<script>
+  document.getElementById('blagoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (confirm('Ви впевнені, що хочете підтвердити відправлення?')) {
+      alert('Транзакцію підтверджено!');
+      e.target.reset();
+    }
+  });
+
+  function confirmBlago(action) {
+    if (action === 'cancel' && confirm('Ви впевнені, що хочете скасувати відправлення?')) {
+      alert('Відправлення скасовано.');
+    }
+  }
+</script>
+    </details>
+
+    <details>
+      <summary>💬 Листування / Взаємодії</summary>
+      <ul>
+        <li>Повідомлення між користувачами</li>
+        <li>Відповіді на звернення</li>
+        <li>Історія взаємодій</li>
+        <li>Завершити або підтвердити взаємодію</li>
+      </ul>
+    </details>
+
+<details open>
+  <summary>💬 Листування / Взаємодії</summary>
+  <nav style="margin: 10px 0; display: flex; gap: 10px;">
+    <a href="#" onclick="switchMessagesTab('inbox')">📥 Вхідні</a>
+    <a href="#" onclick="switchMessagesTab('outbox')">📤 Вихідні</a>
+    <a href="#" onclick="switchMessagesTab('history')">📜 Історія</a>
+  </nav>
+  <div id="messagesInbox"></div>
+  <div id="messagesOutbox" style="display:none;"></div>
+  <div id="messagesHistory" style="display:none;"></div>
+</details>
+
+<script>
+  function switchMessagesTab(tab) {
+    ['messagesInbox', 'messagesOutbox', 'messagesHistory'].forEach(id => {
+      document.getElementById(id).style.display = (id === 'messages' + tab.charAt(0).toUpperCase() + tab.slice(1)) ? 'block' : 'none';
+    });
+  }
+</script>
+
+<!-- Контейнер уже є: <div id="messagesInbox"></div> -->
+
+<script>
+  const inbox_messages = [
+    { adTitle: 'Продам рюкзак', author: 'user123', time: '2025-06-09 10:15', message: 'Цікавить ваш обмін' },
+    { adTitle: 'Продам рюкзак', author: 'user789', time: '2025-06-09 12:30', message: 'Давайте домовимось' },
+    { adTitle: 'Дитяча коляска', author: 'user456', time: '2025-06-08 09:00', message: 'Можна забрати сьогодні?' }
+  ];
+
+  function renderInbox() {
+    const container = document.getElementById('messagesInbox');
+    container.innerHTML = '';
+
+    const grouped = inbox_messages.reduce((acc, msg) => {
+      if (!acc[msg.adTitle]) acc[msg.adTitle] = [];
+      acc[msg.adTitle].push(msg);
+      return acc;
+    }, {});
+
+    for (let title in grouped) {
+      const group = document.createElement('div');
+      group.style.marginBottom = '15px';
+      group.innerHTML = `<h4>${title}</h4>`;
+      grouped[title].forEach(m => {
+        const card = document.createElement('div');
+        card.style.border = '1px solid #ccc';
+        card.style.borderRadius = '6px';
+        card.style.padding = '10px';
+        card.style.marginTop = '5px';
+        card.innerHTML = `
+          <p><strong>👤 ${m.author}</strong> | 🕒 ${m.time}</p>
+          <p>${m.message}</p>
+        `;
+        group.appendChild(card);
+      });
+      container.appendChild(group);
+    }
+  }
+
+  // Виклик після завантаження сторінки або при активації вкладки
+  renderInbox();
+</script>
+
+<script>
+  const outbox_messages = [
+    { adTitle: 'Продам рюкзак', exchangeType: 'barter', exchangeCondition: 'рівноцінно', author: 'user123', authorId: '123', time: '2025-06-09 13:15', message: 'Я готовий запропонувати книгу' },
+    { adTitle: 'Продам рюкзак', exchangeType: 'barter', exchangeCondition: 'рівноцінно', author: 'user123', authorId: '123', time: '2025-06-09 14:45', message: 'Ще маю інструменти' },
+    { adTitle: 'Коляска', exchangeType: 'gift', exchangeCondition: 'безкоштовно', author: 'user456', authorId: '456', time: '2025-06-08 08:00', message: 'Готовий забрати' }
+  ];
+
+  function renderOutbox() {
+    const container = document.getElementById('messagesOutbox');
+    container.innerHTML = '';
+
+    const grouped = outbox_messages.reduce((acc, msg) => {
+      if (!acc[msg.adTitle]) acc[msg.adTitle] = [];
+      acc[msg.adTitle].push(msg);
+      return acc;
+    }, {});
+
+    for (let title in grouped) {
+      const messages = grouped[title];
+      const first = messages[0];
+
+      const group = document.createElement('div');
+      group.style.marginBottom = '15px';
+      group.innerHTML = `
+        <h4>${title}</h4>
+        <p><strong>🔁 Тип обміну:</strong> ${first.exchangeType}</p>
+        <p><strong>📌 Умови:</strong> ${first.exchangeCondition}</p>
+        <p><strong>👤 Автор:</strong> <a href="/profile/${first.authorId}" target="_blank">${first.author}</a></p>
+      `;
+
+      messages.forEach(m => {
+        const msg = document.createElement('div');
+        msg.style.border = '1px solid #ccc';
+        msg.style.borderRadius = '6px';
+        msg.style.padding = '10px';
+        msg.style.marginTop = '5px';
+        msg.innerHTML = `
+          <p><strong>🕒 ${m.time}</strong></p>
+          <p>${m.message}</p>
+        `;
+        group.appendChild(msg);
+      });
+
+      container.appendChild(group);
+    }
+  }
+
+  // Виклик після завантаження сторінки або активації вкладки
+  renderOutbox();
+</script>
+
+<script>
+  const interactions_log = [
+    { date: '2025-06-09', status: 'confirmed', adTitle: 'Продам рюкзак', participant: 'user123' },
+    { date: '2025-06-08', status: 'cancelled', adTitle: 'Коляска', participant: 'user456' },
+    { date: '2025-06-09', status: 'confirmed', adTitle: 'Коляска', participant: 'user789' }
+  ];
+
+  function renderHistory() {
+    const container = document.getElementById('messagesHistory');
+    container.innerHTML = '';
+
+    const grouped = interactions_log.reduce((acc, log) => {
+      if (!acc[log.date]) acc[log.date] = [];
+      acc[log.date].push(log);
+      return acc;
+    }, {});
+
+    const sortedDates = Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a));
+
+    sortedDates.forEach(date => {
+      const section = document.createElement('div');
+      section.innerHTML = `<h4>📅 ${date}</h4>`;
+      grouped[date].forEach(entry => {
+        const item = document.createElement('div');
+        item.style.border = '1px solid #ccc';
+        item.style.borderRadius = '6px';
+        item.style.padding = '10px';
+        item.style.marginTop = '5px';
+        const icon = entry.status === 'confirmed' ? '✅' : '❌';
+        item.innerHTML = `
+          <p>${icon} <strong>${entry.adTitle}</strong> — <em>${entry.status === 'confirmed' ? 'Підтверджено' : 'Скасовано'}</em></p>
+          <p>Учасник: ${entry.participant}</p>
+        `;
+        section.appendChild(item);
+      });
+      container.appendChild(section);
+    });
+  }
+
+  // Виклик після завантаження сторінки або активації вкладки
+  renderHistory();
+</script>
+
+<script>
+  function switchMessagesTab(tab) {
+    ['messagesInbox', 'messagesOutbox', 'messagesHistory'].forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+
+    const activeId = {
+      inbox: 'messagesInbox',
+      outbox: 'messagesOutbox',
+      history: 'messagesHistory'
+    }[tab];
+
+    document.getElementById(activeId).style.display = 'block';
+    localStorage.setItem('activeMessagesTab', tab);
+
+    if (tab === 'inbox') renderInbox();
+    if (tab === 'outbox') renderOutbox();
+    if (tab === 'history') renderHistory();
+  }
+
+  // Встановлюємо активну вкладку після завантаження
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTab = localStorage.getItem('activeMessagesTab') || 'inbox';
+    switchMessagesTab(savedTab);
+  });
+</script>
+
+  </main>
+
+  <footer>
+  © 2025 Родоварта | Зроблено з любов’ю та підтримкою від БО МБФ РОДОВАРТА |
+  <a href="https://rodovarta.github.io/web-rodovarata/" style="color:#FFD700; margin: 0 10px;">На головну</a> |
+  <a href="https://rodovarta.github.io/web-rodovarata/07_adminka.html" style="color:#FFD700;">Для адмінів</a>
+</footer>
+
+</body>
+</html>
