@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мій Профіль | Родоварта</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 40px 20px;
+    }
+    h2 {
+      font-size: 2em;
+      color: #0056b3;
+      margin-bottom: 20px;
+    }
+    details {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Родоварта | Мій Профіль</h1>
+    <p>Ваш простір для взаємодії та росту</p>
+  </header>
+
+  <nav>
+    <a href="https://rodovarta.github.io/web-rodovarata/02_pro_fond.html">Про фонд</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/03_proekti.html">Проєкти</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/04_oholoshennya.html">Оголошення</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/05_vzaemopidtrymka.html">Взаємопідтримка</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/06_miy%20prophil.html">Вхід</a>
+  </nav>
+
+  <main>
+    <h2>👤 Мій Профіль</h2>
+
+    <details open>
+  <summary>📄 Переглянути профіль</summary>
+  <div style="max-width: 600px; margin: 10px auto; background: linear-gradient(145deg, #fdfdfd, #f0f0f0); padding: 25px; border-radius: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); font-family: Arial, sans-serif;">
+    <h2 style="margin-top: 0; color: #2c3e50;">👤 Учасник Програми <br>РОДОВАРТА ЄДНАННЯ</h2>
+
+    <p><strong>Ім’я:</strong> <span id="profileName"></span>
+      <button onclick="editField('profileName')" style="border:none; background:none; cursor:pointer;">✏️</button>
+    </p>
+
+    <p><strong>ID:</strong> 1042</p>
+
+    <p><strong>Username:</strong> <code style="background:#eee; padding:2px 6px; border-radius:4px;">sokil.alex</code></p>
+
+    <p><strong>Роль:</strong> <span id="profileRole" style="color: #16a085;"></span>
+      <button onclick="editRole()" style="border:none; background:none; cursor:pointer;">✏️</button>
+    </p>
+
+    <p><strong>Опис:</strong> <span id="profileDesc"></span>
+      <button onclick="editField('profileDesc')" style="border:none; background:none; cursor:pointer;">✏️</button>
+    </p>
+
+    <p style="background:#ecf0f1; padding: 10px; border-left: 5px solid #3498db; border-radius: 4px;">
+      <strong>💠 Кількість взаємодій з користувачами:</strong> <span style="font-size: 1.4em;">64</span>
+    </p>
+
+    <div style="margin-top: 15px;">
+      <a href="/profile/1042" style="background: #2980b9; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none;" target="_blank">🔗 Закриття профілю</a>
+    </div>
+  </div>
+
+  <script>
+    const defaultProfile = {
+      profileName: 'Олександр Сокіл',
+      profileRole: 'Учасник',
+      profileDesc: 'Люблю допомагати іншим, ділюсь знаннями, мрію про сильну громаду.'
+    };
+
+    function loadProfile() {
+      const saved = JSON.parse(localStorage.getItem('userProfile')) || defaultProfile;
+      for (let key in saved) {
+        const el = document.getElementById(key);
+        if (el) el.textContent = saved[key];
+      }
+    }
+
+    function saveProfileField(id, value) {
+      const current = JSON.parse(localStorage.getItem('userProfile')) || defaultProfile;
+      current[id] = value;
+      localStorage.setItem('userProfile', JSON.stringify(current));
+    }
+
+    function editField(id) {
+      const span = document.getElementById(id);
+      const current = span.textContent;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = current;
+      input.style = 'padding:4px; width:80%; margin-top:5px;';
+      span.replaceWith(input);
+      input.focus();
+
+      input.addEventListener('blur', () => {
+        if (confirm('Зберегти зміни?')) {
+          const newSpan = document.createElement('span');
+          newSpan.id = id;
+          newSpan.textContent = input.value;
+          input.replaceWith(newSpan);
+          saveProfileField(id, input.value);
+        } else {
+          input.replaceWith(span);
+        }
+      });
+    }
+
+    function editRole() {
+      const span = document.getElementById('profileRole');
+      const current = span.textContent;
+      const select = document.createElement('select');
+      select.id = 'profileRole';
+      select.style = 'padding:4px; margin-top:5px;';
+      const roles = [
+        'Учасник',
+        'Ментор / наставник',
+        'Громадський діяч / державний службовець',
+        'Підприємець',
+        'Майстер / самозайнятий / митець'
+      ];
+      roles.forEach(role => {
+        const option = document.createElement('option');
+        option.value = role;
+        option.textContent = role;
+        if (role === current) option.selected = true;
+        select.appendChild(option);
+      });
+
+      span.replaceWith(select);
+      select.focus();
+
+      select.addEventListener('blur', () => {
+        if (confirm('Зберегти роль?')) {
+          const newSpan = document.createElement('span');
+          newSpan.id = 'profileRole';
+          newSpan.style.color = '#16a085';
+          newSpan.textContent = select.value;
+          select.replaceWith(newSpan);
+          saveProfileField('profileRole', select.value);
+        } else {
+          select.replaceWith(span);
+        }
+      });
+    }
+
+    // Завантажити збережені дані при старті
+    window.addEventListener('DOMContentLoaded', loadProfile);
+  </script>
+</details>
+
+
+   <details open>
+  <summary>🌟 Благочестя</summary>
+
+  <h3 onclick="toggleSection('balanceSection')" style="cursor:pointer;">💰 Переглянути баланс</h3>
+<div id="balanceSection" style="display: none;">
+  <p><strong>Поточний баланс:</strong> <span id="blagoBalance">128</span></p>
+</div>
+
+  <h3 onclick="toggleSection('topUpSection')" style="cursor:pointer;">➕ Поповнити (донат / реферал / вручну)</h3>
+<div id="topUpSection" style="display: none;">
+  <form onsubmit="return confirmTopUp()" style="margin-bottom: 20px;">
+    <label>💸 Кількість:<br><input type="number" required style="width: 100%; padding: 8px;"></label><br><br>
+    <label>📝 Коментар:<br><textarea style="width: 100%; padding: 8px;"></textarea></label><br><br>
+    <label>📎 Прикріпити файл:<br><input type="file" style="width: 100%;"></label><br><br>
+    <button type="submit" style="background: #007BFF; color: white; padding: 10px 16px; border: none; border-radius: 6px;">📤 Відправити на опрацювання</button>
+  </form>
+</div>
+
+  <h3 onclick="toggleSection('sendSection')" style="cursor:pointer;">🔁 Надіслати іншому користувачу</h3>
+<div id="sendSection" style="display: none;">
+  <form onsubmit="return confirmTransfer()" style="margin-bottom: 20px;">
+    <label>🔑 ID відправника:<br><input type="text" required style="width: 100%; padding: 8px;"></label><br><br>
+    <label>🎯 ID отримувача:<br><input type="text" required style="width: 100%; padding: 8px;"></label><br><br>
+    <label>💰 Сума:<br><input type="number" required style="width: 100%; padding: 8px;"></label><br><br>
+    <label>📝 Коментар:<br><textarea style="width: 100%; padding: 8px;"></textarea></label><br><br>
+    <div style="display:flex; gap:10px;">
+      <button type="button" onclick="alert('Скасовано')" style="background: #dc3545; color: white; padding: 10px 16px; border: none; border-radius: 6px;">❌ Скасувати</button>
+      <button type="submit" style="background: #28a745; color: white; padding: 10px 16px; border: none; border-radius: 6px;">✅ Підтвердити</button>
+    </div>
+  </form>
+</div>
+
+  <h3 onclick="toggleSection('historySection')" style="cursor:pointer;">📜 Історія транзакцій</h3>
+<div id="historySection" style="display: none;">
+  <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+    <thead style="background: #f0f0f0;">
+      <tr>
+        <th style="border: 1px solid #ccc; padding: 8px;">📅 Дата</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">🔄 Вид руху</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">💰 Кількість</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">💠 Залишок</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">📌 Статус</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">09-06-2025</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Зарахування</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">+50</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">128</td>
+        <td style="border: 1px solid #ccc; padding: 8px; color: green;">Успішно</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">08-06-2025</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Відправлення</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">-20</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">78</td>
+        <td style="border: 1px solid #ccc; padding: 8px; color: green;">Успішно</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">07-06-2025</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Зарахування</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">+70</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">98</td>
+        <td style="border: 1px solid #ccc; padding: 8px; color: orange;">В роботі</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</details>
+
+<script>
+  function confirmTopUp() {
+    return confirm('Ви впевнені, що хочете відправити на опрацювання?');
+  }
+  function confirmTransfer() {
+    return confirm('Ви впевнені, що хочете здійснити переказ?');
+  }
+  function toggleSection(id) {
+    const section = document.getElementById(id);
+    section.style.display = (section.style.display === 'none') ? 'block' : 'none';
+  }
+</script>
+
+
+    <details>
+  <summary>👥 Мої друзі</summary>
+  <div id="friendsList">
+    <p>Поточні друзі:</p>
+    <ul id="friendItems"></ul>
+  </div>
+  <div style="margin-top: 15px;">
+    <input type="text" id="newFriendId" placeholder="Введіть ID користувача" style="padding: 8px; width: 70%;">
+    <button onclick="addFriend()" style="padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 6px;">➕ Додати</button>
+  </div>
+</details>
+
+<script>
+  const friendsKey = 'myFriendsList';
+  const userDirectory = {
+    "1042": "sokil.alex",
+    "1001": "vita.sun",
+    "1002": "andriy.coder"
+  };
+
+  function loadFriends() {
+    const list = JSON.parse(localStorage.getItem(friendsKey)) || [];
+    const ul = document.getElementById('friendItems');
+    ul.innerHTML = '';
+    list.forEach((id, index) => {
+      const username = userDirectory[id] || ` ${id}`;
+      const li = document.createElement('li');
+
+      const link = document.createElement('a');
+      link.href = `/profile/${id}`;
+      link.textContent = username;
+      link.style = 'text-decoration: underline; color: #007BFF;';
+      link.target = '_blank';
+
+      const btn = document.createElement('button');
+      btn.textContent = '❌ Видалити';
+      btn.style = 'margin-left: 10px; background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px;';
+      btn.onclick = () => {
+        if (confirm(`Ви впевнені, що хочете видалити ${username}?`)) {
+          list.splice(index, 1);
+          localStorage.setItem(friendsKey, JSON.stringify(list));
+          loadFriends();
+        }
+      };
+
+      li.appendChild(link);
+      li.appendChild(btn);
+      ul.appendChild(li);
+    });
+  }
+
+  function addFriend() {
+    const input = document.getElementById('newFriendId');
+    const id = input.value.trim();
+    if (id && confirm(`Додати користувача з ID ${id} до друзів?`)) {
+      const list = JSON.parse(localStorage.getItem(friendsKey)) || [];
+      list.push(id);
+      localStorage.setItem(friendsKey, JSON.stringify(list));
+      input.value = '';
+      loadFriends();
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', loadFriends);
+</script>
+
+
+    <details open>
+  <summary>🎁 Мій лист бажань</summary>
+  <div id="wishlistContainer" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:flex-start;" style="transition: all 0.3s ease-in-out;"></div>
+  <div style="margin-top: 15px;">
+    <h4>➕ Додати бажання (макс. 3)</h4>
+    <input type="text" id="wishTitle" placeholder="Назва" style="width:100%; padding:6px;"><br><br>
+    <textarea id="wishDesc" placeholder="Опис" style="width:100%; padding:6px;"></textarea><br><br>
+    <input type="file" id="wishPhoto1" accept="image/*"><br>
+    <input type="file" id="wishPhoto2" accept="image/*"><br><br>
+    <input type="text" id="wishDate" placeholder="Бажана дата: дд.мм.рррр" style="width:100%; padding:6px;"><br><br>
+    <button onclick="addWish()" id="addWishBtn" style="padding: 10px; background: green; color:white; border:none; border-radius:6px;">✅ Додати</button>
+  </div>
+</details>
+
+<script>
+  const wishesKey = "userWishlist";
+
+  function renderWishes() {
+    const container = document.getElementById("wishlistContainer");
+    const wishes = JSON.parse(localStorage.getItem(wishesKey)) || [];
+    container.innerHTML = "";
+    wishes.forEach((wish, index) => {
+      const block = document.createElement("div"); block.style.flex = "1 1 calc(33.33% - 16px)"; block.style.maxWidth = "calc(33.33% - 16px)";
+      block.style = "box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding:16px; margin-top:16px; border-radius:12px; background:linear-gradient(135deg,#fefefe,#f0f0f0); border-left:6px solid #3498db;";
+      block.innerHTML = `
+        <strong>${wish.title}</strong><br>
+        <em>${wish.date}</em><br>
+        <p>${wish.desc}</p>
+        ${wish.photo1 ? `<img src="${wish.photo1}" width="80">` : ""}
+        ${wish.photo2 ? `<img src="${wish.photo2}" width="80" style="margin-left:8px;">` : ""}
+        <div style="margin-top:12px; display: flex; gap: 10px;">
+          <button onclick="editWish(${index})" style="padding:6px 12px; border:none; background:#f39c12; color:white; border-radius:6px;">✏️ Редагувати</button>
+          <button onclick="deleteWish(${index})" style="padding:6px 12px; border:none; background:#e74c3c; color:white; border-radius:6px;">❌ Видалити</button>
+        </div>
+      `;
+      container.appendChild(block);
+    });
+  }
+
+  function addWish() {
+    const title = document.getElementById("wishTitle").value.trim();
+    const desc = document.getElementById("wishDesc").value.trim();
+    const date = document.getElementById("wishDate").value.trim();
+    const photo1 = document.getElementById("wishPhoto1").files[0];
+    const photo2 = document.getElementById("wishPhoto2").files[0];
+    const wishes = JSON.parse(localStorage.getItem(wishesKey)) || [];
+
+    if (wishes.length >= 3) return alert("Максимум 3 бажання");
+    if (!title || !date) return alert("Заповніть обов'язкові поля");
+
+    const reader1 = new FileReader();
+    const reader2 = new FileReader();
+
+    let img1 = "", img2 = "";
+
+    reader1.onload = e => {
+      img1 = e.target.result;
+      reader2.onload = e2 => {
+        img2 = e2.target.result;
+        wishes.push({ title, desc, date, photo1: img1, photo2: img2 });
+        localStorage.setItem(wishesKey, JSON.stringify(wishes));
+        renderWishes(); showAddIndicator();
+      };
+      if (photo2) reader2.readAsDataURL(photo2);
+      else {
+        wishes.push({ title, desc, date, photo1: img1, photo2: "" });
+        localStorage.setItem(wishesKey, JSON.stringify(wishes));
+        renderWishes(); showAddIndicator();
+      }
+    };
+    if (photo1) reader1.readAsDataURL(photo1);
+    else {
+      wishes.push({ title, desc, date, photo1: "", photo2: "" });
+      localStorage.setItem(wishesKey, JSON.stringify(wishes));
+      renderWishes(); showAddIndicator();
+    }
+
+    document.getElementById("wishTitle").value = "";
+    document.getElementById("wishDesc").value = "";
+    document.getElementById("wishDate").value = "";
+    document.getElementById("wishPhoto1").value = "";
+    document.getElementById("wishPhoto2").value = "";
+  }
+
+  function deleteWish(index) {
+    if (!confirm("Ви впевнені, що хочете видалити бажання?")) return;
+    const wishes = JSON.parse(localStorage.getItem(wishesKey)) || [];
+    wishes.splice(index, 1);
+    localStorage.setItem(wishesKey, JSON.stringify(wishes));
+    renderWishes(); showAddIndicator();
+  }
+
+  function editWish(index) {
+    const wishes = JSON.parse(localStorage.getItem(wishesKey)) || [];
+    const wish = wishes[index];
+    if (!confirm("Редагувати це бажання?")) return;
+    document.getElementById("wishTitle").value = wish.title;
+    document.getElementById("wishDesc").value = wish.desc;
+    document.getElementById("wishDate").value = wish.date;
+    wishes.splice(index, 1);
+    localStorage.setItem(wishesKey, JSON.stringify(wishes));
+    renderWishes(); showAddIndicator();
+  }
+
+  document.addEventListener("DOMContentLoaded", renderWishes);
+
+  function showAddIndicator() {
+    const btn = document.getElementById("addWishBtn");
+    btn.disabled = true;
+    btn.innerText = "⏳ Додається...";
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerText = "✅ Додати";
+    }, 1200);
+  }
+</script>
+
+    <details>
+      <summary>📣 Мої відгуки</summary>
+  <div id="feedbackStream" style="margin-top:15px; display: flex; flex-direction: column; gap: 16px;"></div>
+</details>
+
+<script>
+  const feedbacks = [
+    {
+      userId: "1042",
+      username: "sokil.alex",
+      offerTitle: "Тур до Карпат",
+      comment: "Чудова співпраця, дякую за тур!",
+      date: "08-06-2025"
+    },
+    {
+      userId: "1001",
+      username: "vita.sun",
+      offerTitle: "Курс із медитації",
+      comment: "Дуже щира людина. Рекомендую!",
+      date: "07-06-2025"
+    }
+  ];
+
+  function renderFeedback() {
+    const stream = document.getElementById("feedbackStream");
+    stream.innerHTML = "";
+    feedbacks.forEach(f => {
+      const block = document.createElement("div");
+      block.style = "padding:12px 16px; border-radius:12px; background:#fefefe; box-shadow:0 3px 6px rgba(0,0,0,0.08); border-left: 4px solid #f39c12;";
+      block.innerHTML = `
+        <div style="margin-bottom:4px;">
+          <a href="/profile/${f.userId}" target="_blank" style="font-weight:bold; color:#007BFF; text-decoration:none;">${f.username}</a>
+           → <span style="color:#444;">${f.offerTitle}</span>
+        </div>
+        <div style="font-size: 0.95em; color:#222;">${f.comment}</div>
+        <div style="font-size: 0.8em; color:#888; margin-top:4px;">${f.date}</div>
+      `;
+      stream.appendChild(block);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", renderFeedback);
+</script>
+
+<details open>
+  <summary>📊 Моя статистика</summary>
+  <div style="margin-top: 15px; display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="flex:1; min-width: 200px; background: #f1f8ff; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h4 style="margin-top:0;">📢 Оголошення</h4>
+      <p style="font-size: 2em; margin: 0;" id="adsCount">0</p>
+    </div>
+    <div style="flex:1; min-width: 200px; background: #f1fff4; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h4 style="margin-top:0;">🤝 Взаємодії</h4>
+      <p style="font-size: 2em; margin: 0;" id="interactionsCount">0</p>
+    </div>
+    <div style="flex:1; min-width: 200px; background: #fffaf1; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h4 style="margin-top:0;">🌟 Благочестя</h4>
+      <p style="margin: 0; font-size: 1.2em;">Отримано: <strong id="receivedPoints">0</strong></p>
+      <p style="margin: 0; font-size: 1.2em;">Передано: <strong id="sentPoints">0</strong></p>
+    </div>
+  </div>
+</details>
+
+<script>
+  function loadStats() {
+    // Дані можуть бути взяті з localStorage або API
+    const stats = {
+      ads: 8,
+      interactions: 21,
+      received: 130,
+      sent: 110
+    };
+
+    document.getElementById("adsCount").textContent = stats.ads;
+    document.getElementById("interactionsCount").textContent = stats.interactions;
+    document.getElementById("receivedPoints").textContent = stats.received;
+    document.getElementById("sentPoints").textContent = stats.sent;
+  }
+
+  document.addEventListener("DOMContentLoaded", loadStats);
+</script>
+
+<details open>
+  <summary>🔗 Реферальне посилання</summary>
+  <div style="margin-top: 12px;">
+    <input type="text" id="refLink" placeholder="Згенеруйте посилання" readonly style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+      <button onclick="generateRefLink()" style="background:#007bff; color:white; padding:8px 12px; border:none; border-radius:6px;">🔄 Згенерувати</button>
+      <button onclick="copyTextOnly()" style="background:#28a745; color:white; padding:8px 12px; border:none; border-radius:6px;">📋 Копіювати</button>
+      <button onclick="viewRefUsers()" style="background:#ffc107; color:black; padding:8px 12px; border:none; border-radius:6px;">👥 Переглянути</button>
+    </div>
+    <div id="qrCodeBox" style="margin-top:15px; cursor: pointer;" onclick="copyQRImage()"></div>
+    <div id="refUsersList" style="margin-top:15px;"></div>
+  </div>
+</details>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script>
+  const myUserId = localStorage.getItem("myUserId") || "1042";
+  if (!localStorage.getItem("myUserId")) {
+    localStorage.setItem("myUserId", myUserId);
+  }
+
+  const invitedUsersDetailed = [
+    { id: "1001", username: "vita.sun", date: "25.05.2025" },
+    { id: "1002", username: "andriy.coder", date: "30.05.2025" },
+    { id: "1003", username: "yana.healer", date: "01.06.2025" }
+  ];
+
+  function generateRefLink() {
+    const link = `https://rodovarta.github.io/web-rodovarata/user_id_${myUserId}.html`;
+    document.getElementById("refLink").value = link;
+
+    const qrCanvas = document.createElement('canvas');
+    new QRious({
+      element: qrCanvas,
+      value: link,
+      size: 180
+    });
+
+    qrCanvas.title = "Натисніть, щоб скопіювати QR-код";
+    qrCanvas.style.cursor = "pointer";
+
+    const qrBox = document.getElementById("qrCodeBox");
+    qrBox.innerHTML = "<p><strong>QR-код:</strong></p>";
+    qrBox.appendChild(qrCanvas);
+  }
+
+  function copyTextOnly() {
+    const link = document.getElementById("refLink").value;
+    const msg = `Запрошую до Програми РОДОВАРТА ЄДНАННЯ! ${link}`;
+    navigator.clipboard.writeText(msg).then(() => {
+      alert("Посилання та текст скопійовано!");
+    });
+  }
+
+  function copyQRImage() {
+    const canvas = document.querySelector("#qrCodeBox canvas");
+    canvas.toBlob(blob => {
+      const item = new ClipboardItem({ "image/png": blob });
+      navigator.clipboard.write([item]).then(() => {
+        alert("QR-код скопійовано у буфер обміну!");
+      });
+    });
+  }
+
+  function viewRefUsers() {
+    const container = document.getElementById("refUsersList");
+    container.innerHTML = `<p><strong>Запрошені учасники:</strong></p>`;
+    const ul = document.createElement("ul");
+    invitedUsersDetailed.forEach(user => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong style="color:#2c3e50;">${user.date}</strong> • 
+        <a href="/profile/${user.id}" target="_blank" style="color:#007BFF;">${user.username}</a>`;
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+    container.innerHTML += `<p><strong>Загальна кількість:</strong> ${invitedUsersDetailed.length}</p>`;
+  }
+</script>
+
+</main>
+
+  <footer>
+  © 2025 Родоварта | Зроблено з любов’ю та підтримкою від БО МБФ РОДОВАРТА |
+  <a href="https://rodovarta.github.io/web-rodovarata/" style="color:#FFD700; margin: 0 10px;">На головну</a> |
+  <a href="https://rodovarta.github.io/web-rodovarata/07_adminka.html" style="color:#FFD700;">Для адмінів</a>
+</footer>
+
+</body>
+</html>
