@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оголошення | Родоварта</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header, footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    nav {
+      background-color: #0056b3;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 40px 20px;
+    }
+    h2 {
+      font-size: 2em;
+      color: #0056b3;
+      margin-bottom: 20px;
+    }
+    details {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Родоварта | Оголошення</h1>
+    <p>Обмінюємось з добром і користю</p>
+  </header>
+
+  <nav>
+    <a href="https://rodovarta.github.io/web-rodovarata/02_pro_fond.html">Про фонд</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/03_proekti.html">Проєкти</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/04_oholoshennya.html">Оголошення</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/05_vzaemopidtrymka.html">Взаємопідтримка</a>
+    <a href="https://rodovarta.github.io/web-rodovarata/06_miy%20prophil.html">Вхід</a>
+  </nav>
+
+  <main>
+    <h2>📢 Оголошення</h2>
+
+    <details open>
+      <summary><span style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #0056b3;">➕ Додати оголошення</span></summary>
+      <form id="adForm" style="display: flex; flex-direction: column; gap: 15px; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 15px;">
+    <label style="font-weight: 600;">📂 Категорія:
+      <select name="category" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="">-- Оберіть категорію --</option>
+        <option>🛡️ Захисникам та захисницям</option>
+        <option>👶 Для дітей і батьків</option>
+        <option>🖨️ 3D-друк на замовлення</option>
+        <option>🧺 Авторські товари</option>
+        <option>🚘 Сумісні поїздки</option>
+        <option>🧠 Менторство та психологічна підтримка</option>
+        <option>🔮 Наставництво та езотерика</option>
+        <option>🏠 Житло та нерухомість</option>
+        <option>🚗 Транспорт і авто</option>
+        <option>🛏️ Оренда житла</option>
+        <option>🔧 Автозапчастини і аксесуари</option>
+        <option>💼 Завдання та вакансії</option>
+        <option>🛋️ Все для дому і саду</option>
+        <option>📱 Техніка та гаджети</option>
+        <option>🧰 Бізнес пропозиції</option>
+        <option>🐶 Домашні улюбленці</option>
+        <option>👗 Одяг та мода</option>
+        <option>⚽ Хобі та активний відпочинок</option>
+        <option>🏕️ Туристичне та мисливське спорядження</option>
+      </select>
+    </label>
+    <label style="font-weight: 600;">🏷️ Назва:
+      <input type="text" name="title" required placeholder="Наприклад: Дитяча коляска" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+    </label>
+    <label style="font-weight: 600;">📝 Опис:
+      <textarea name="description" rows="4" required placeholder="Коротко і по суті..." style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+    </label>
+    <label style="font-weight: 600;">🖼️ Фото (1–3):
+      <input type="file" name="photos" accept="image/*" multiple style="width: 100%; padding: 10px;">
+    </label>
+    <label style="font-weight: 600;">🔁 Вид обміну:
+      <select name="exchangeType" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="">-- Оберіть вид обміну --</option>
+        <option value="gift">В дар</option>
+        <option value="rent">В прокат</option>
+        <option value="sale">На продаж</option>
+        <option value="swap">На обмін</option>
+      </select>
+    </label>
+    <label style="font-weight: 600;">📌 Умови обміну:
+      <select name="exchangeCondition" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="">-- Оберіть умову --</option>
+        <option value="free">Безкоштовно</option>
+        <option value="blago">За Благочестя</option>
+        <option value="money">За кошти</option>
+        <option value="barter">Бартер</option>
+      </select>
+    </label>
+    <label style="font-weight: 600;">💬 Коментар або умови передачі:
+      <input type="text" name="comment" placeholder="Наприклад: Безкоштовно або доставка Новою поштою" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+    </label>
+    <button type="submit" style="background-color: #28a745; color: white; padding: 12px; font-size: 1em; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">✅ Опублікувати оголошення</button>
+  </form>
+
+  <div id="adPreview" style="margin-top: 30px; background: #f0f9ff; padding: 15px; border-radius: 10px; border: 1px dashed #007BFF;"></div>
+
+  <script>
+    const adsKey = 'user_ads_list';
+
+    document.getElementById('adForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        category: form.category.value,
+        title: form.title.value,
+        description: form.description.value,
+        exchangeType: form.exchangeType.value,
+        exchangeCondition: form.exchangeCondition.value,
+        comment: form.comment.value,
+        createdAt: new Date().toLocaleString()
+      };
+
+      let allAds = JSON.parse(localStorage.getItem(adsKey)) || [];
+      allAds.push(data);
+      localStorage.setItem(adsKey, JSON.stringify(allAds));
+
+      const preview = document.getElementById('adPreview');
+      preview.innerHTML = `
+        <h4 style="color: #0056b3;">📦 Ваше оголошення:</h4>
+        <p><strong>📂 Категорія:</strong> ${data.category}</p>
+        <p><strong>🏷️ Назва:</strong> ${data.title}</p>
+        <p><strong>📝 Опис:</strong> ${data.description}</p>
+        <p><strong>🔁 Вид обміну:</strong> ${form.exchangeType.options[form.exchangeType.selectedIndex].text}</p>
+        <p><strong>📌 Умови:</strong> ${form.exchangeCondition.options[form.exchangeCondition.selectedIndex].text}</p>
+        <p><strong>💬 Коментар:</strong> ${data.comment}</p>
+        <p style="color: green; font-weight: bold;">✅ Оголошення збережено в localStorage</p>
+      `;
+      form.reset();
+    });
+  </script>
+</details>
+
+    <details open>
+      <summary style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #0056b3;">👁️‍🗨️ Мої оголошення</summary>
+      <div id="myAdsList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;"></div>
+
+  <script>
+    function renderMyAds() {
+      const adsKey = 'user_ads_list';
+      const list = document.getElementById('myAdsList');
+      const ads = JSON.parse(localStorage.getItem(adsKey)) || [];
+      list.innerHTML = '';
+
+      if (!ads.length) {
+        list.innerHTML = '<p style="color: gray;">Наразі немає оголошень.</p>';
+        return;
+      }
+
+      ads.forEach((ad, index) => {
+        const card = document.createElement('div');
+        card.style.padding = '15px';
+        card.style.border = '1px solid #ddd';
+        card.style.borderRadius = '8px';
+        card.style.background = '#fff';
+        card.style.boxShadow = '0 1px 4px rgba(0,0,0,0.05)';
+
+        card.innerHTML = `
+          <h4 style="margin-bottom: 5px; color: #007BFF;">${ad.title}</h4>
+          <p><strong>📂 Категорія:</strong> ${ad.category}</p>
+          <p><strong>📝 Опис:</strong> ${ad.description}</p>
+          <p><strong>🔁 Обмін:</strong> ${ad.exchangeType}</p>
+          <p><strong>📌 Умови:</strong> ${ad.exchangeCondition}</p>
+          <p><strong>💬 Коментар:</strong> ${ad.comment}</p>
+          <p><small>📅 Дата: ${ad.createdAt}</small></p>
+          <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button onclick="editAd(${index})" style="padding: 6px 10px; border-radius: 5px; border: none; background: #ffc107; color: #000;">✏️ Редагувати</button>
+            <button onclick="deleteAd(${index})" style="padding: 6px 10px; border-radius: 5px; border: none; background: #dc3545; color: #fff;">🗑️ Видалити</button>
+            <button onclick="shareAd(${index})" style="padding: 6px 10px; border-radius: 5px; border: none; background: #17a2b8; color: #fff;">📤 Поділитись</button>
+          </div>
+        `;
+
+        list.appendChild(card);
+      });
+    }
+
+    function deleteAd(index) {
+      const adsKey = 'user_ads_list';
+      const ads = JSON.parse(localStorage.getItem(adsKey)) || [];
+      if (confirm('Ви дійсно хочете видалити це оголошення?')) {
+        ads.splice(index, 1);
+        localStorage.setItem(adsKey, JSON.stringify(ads));
+        renderMyAds();
+      }
+    }
+
+    function editAd(index) {
+      const adsKey = 'user_ads_list';
+      const ads = JSON.parse(localStorage.getItem(adsKey)) || [];
+      const ad = ads[index];
+      const newTitle = prompt('Нова назва:', ad.title);
+      if (newTitle !== null) {
+        ad.title = newTitle;
+        localStorage.setItem(adsKey, JSON.stringify(ads));
+        renderMyAds();
+      }
+    }
+
+    function shareAd(index) {
+      const adsKey = 'user_ads_list';
+      const ads = JSON.parse(localStorage.getItem(adsKey)) || [];
+      const ad = ads[index];
+      const message = `🛎️ Оголошення: ${ad.title}\n📂 ${ad.category}\n🔁 ${ad.exchangeType} | 📌 ${ad.exchangeCondition}\n📝 ${ad.description}\n💬 ${ad.comment}`;
+      navigator.clipboard.writeText(message).then(() => {
+        alert('Скопійовано! Можна вставити в месенджер чи соцмережу.');
+      });
+    }
+
+    renderMyAds();
+  </script>
+</details>
+
+    <details open>
+      <summary style="font-size: 1.4em; font-weight: bold; cursor: pointer; color: #d39e00;">⭐ Обрані (улюблені)</summary>
+        <div id="favouritesList" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;"></div>
+
+  <script>
+    const favKey = 'favourite_ads';
+
+    function toggleFavourite(ad) {
+      let favs = JSON.parse(localStorage.getItem(favKey)) || [];
+      const existing = favs.find(f => f.title === ad.title && f.createdAt === ad.createdAt);
+      if (existing) {
+        favs = favs.filter(f => !(f.title === ad.title && f.createdAt === ad.createdAt));
+        alert('Видалено з обраного');
+      } else {
+        favs.push(ad);
+        alert('Додано до обраного');
+      }
+      localStorage.setItem(favKey, JSON.stringify(favs));
+      renderFavourites();
+    }
+
+    function renderFavourites() {
+      const container = document.getElementById('favouritesList');
+      const favs = JSON.parse(localStorage.getItem(favKey)) || [];
+      container.innerHTML = '';
+
+      if (favs.length === 0) {
+        container.innerHTML = '<p style="color: gray;">У вас ще немає обраних оголошень.</p>';
+        return;
+      }
+
+      favs.forEach((ad, index) => {
+        const box = document.createElement('div');
+        box.style.padding = '15px';
+        box.style.border = '1px solid #ddd';
+        box.style.borderRadius = '8px';
+        box.style.background = '#fff8e1';
+        box.style.boxShadow = '0 1px 4px rgba(0,0,0,0.05)';
+
+        box.innerHTML = `
+          <h4 style="margin-bottom: 5px; color: #e0a800;">${ad.title}</h4>
+          <p><strong>📂 Категорія:</strong> ${ad.category}</p>
+          <p><strong>📝 Опис:</strong> ${ad.description}</p>
+          <p><strong>🔁 Обмін:</strong> ${ad.exchangeType}</p>
+          <p><strong>📌 Умови:</strong> ${ad.exchangeCondition}</p>
+          <p><strong>💬 Коментар:</strong> ${ad.comment}</p>
+          <p><small>📅 Дата: ${ad.createdAt}</small></p>
+          <div style="margin-top: 10px;">
+            <button onclick='toggleFavourite(${JSON.stringify(ad)})' style="padding: 6px 10px; border-radius: 5px; border: none; background: #ffc107; color: #000;">⭐ Прибрати з обраного</button>
+          </div>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    renderFavourites();
+  </script>
+</details>
+
+    <details>
+      <summary>🔍 Пошук оголошень</summary>
+      <!-- 🔍 ВІДЖЕТ: РОЗШИРЕНИЙ ПОШУК ОГОЛОШЕНЬ -->
+<button onclick="openAdFeed()" style="padding: 10px 15px; background: #007BFF; color: white; border: none; border-radius: 6px; font-size: 1em; cursor: pointer;">
+  📋 Переглянути всі оголошення
+</button>
+
+<div id="adFeedOverlay"
+     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 9998;"
+     onclick="closeAdFeed()">
+</div>
+
+<div id="adFeedModal"
+     style="display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 90%; max-width: 1000px; max-height: 90%;
+            overflow-y: auto; background: white; padding: 20px; border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3); z-index: 9999;">
+  <h3 style="margin-top: 0; color: #0056b3;">📋 Стрічка оголошень</h3>
+
+  <!-- 🎯 Панель фільтрів -->
+  <div style="position: sticky; top: 0; background: white; z-index: 1;
+              padding-bottom: 10px; margin-bottom: 20px; border-bottom: 1px solid #ccc;">
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+      <input type="text" id="filterKeyword" placeholder="🔎 Ключове слово..."
+             style="flex:1; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+      <select id="filterCategory" style="padding: 8px; border-radius: 6px;">
+        <option value="">📂 Усі категорії</option>
+        <option>🛡️ Захисникам та захисницям</option>
+        <option>👶 Для дітей і батьків</option>
+        <option>🖨️ 3D-друк на замовлення</option>
+        <option>🧺 Авторські товари</option>
+        <option>🚘 Сумісні поїздки</option>
+        <option>🧠 Менторство та психологічна підтримка</option>
+        <option>🔮 Наставництво та езотерика</option>
+        <option>🏠 Житло та нерухомість</option>
+        <option>🚗 Транспорт і авто</option>
+        <option>🛏️ Оренда житла</option>
+        <option>🔧 Автозапчастини і аксесуари</option>
+        <option>💼 Завдання та вакансії</option>
+        <option>🛋️ Все для дому і саду</option>
+        <option>📱 Техніка та гаджети</option>
+        <option>🧰 Бізнес пропозиції</option>
+        <option>🐶 Домашні улюбленці</option>
+        <option>👗 Одяг та мода</option>
+        <option>⚽ Хобі та активний відпочинок</option>
+        <option>🏕️ Туристичне та мисливське спорядження</option>
+      </select>
+      <select id="filterExchange" style="padding: 8px; border-radius: 6px;">
+        <option value="">🔁 Усі види обміну</option>
+        <option>На обмін</option>
+        <option>За Благочестя</option>
+        <option>В дар</option>
+        <option>Безкоштовно</option>
+      </select>
+
+      <select id="filterCondition" style="padding: 8px; border-radius: 6px;">
+        <option value="">📌 Усі умови</option>
+        <option>Безкоштовно</option>
+        <option>За Благочестя</option>
+        <option>За кошти</option>
+        <option>Бартер</option>
+      </select>
+
+      <select id="sortOrder" style="padding: 8px; border-radius: 6px;">
+        <option value="new">🕒 Нові спочатку</option>
+        <option value="old">📜 Старі спочатку</option>
+      </select>
+
+      <button onclick="applyFilters()" style="padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 6px;">🔍 Застосувати</button>
+    </div>
+  </div>
+
+  <!-- 📜 Сюди будуть завантажені картки оголошень -->
+  <div id="adFeedList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;"></div>
+
+  <button onclick="closeAdFeed()" style="margin-top: 20px; background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 6px;">
+    ✖️ Закрити
+  </button>
+</div>
+
+<!-- ✅ СТИЛІ (можна винести в <style>) -->
+<style>
+  #adFeedModal {
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -40%); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  @media (max-width: 600px) {
+    #adFeedModal {
+      width: 90%;
+    }
+  }
+</style>
+
+<!-- ✅ JS: Відкрити/закрити -->
+<script>
+  function openAdFeed() {
+    document.getElementById('adFeedModal').style.display = 'block';
+    document.getElementById('adFeedOverlay').style.display = 'block';
+    loadAllAds(); // підвантажити оголошення
+  }
+
+  function closeAdFeed() {
+    document.getElementById('adFeedModal').style.display = 'none';
+    document.getElementById('adFeedOverlay').style.display = 'none';
+  }
+</script>
+<script>
+  function applyFilters() {
+    const keyword = document.getElementById('filterKeyword').value.toLowerCase();
+    const category = document.getElementById('filterCategory').value;
+    const exchange = document.getElementById('filterExchange').value;
+    const condition = document.getElementById('filterCondition').value;
+    const sort = document.getElementById('sortOrder').value;
+
+    const ads = JSON.parse(localStorage.getItem('user_ads_list')) || [];
+
+    let filtered = ads.filter(ad => {
+      const matchesKeyword = ad.title.toLowerCase().includes(keyword) || ad.description.toLowerCase().includes(keyword);
+      const matchesCategory = !category || ad.category === category;
+      const matchesExchange = !exchange || ad.exchangeType === exchange;
+      const matchesCondition = !condition || ad.exchangeCondition === condition;
+      return matchesKeyword && matchesCategory && matchesExchange && matchesCondition;
+    });
+
+    if (sort === 'new') {
+      filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    } else {
+      filtered.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    }
+
+    renderAdFeed(filtered);
+  }
+
+  function loadAllAds() {
+    const ads = JSON.parse(localStorage.getItem('user_ads_list')) || [];
+    renderAdFeed(ads);
+  }
+
+  function renderAdFeed(ads) {
+    const container = document.getElementById('adFeedList');
+    container.innerHTML = '';
+
+    if (ads.length === 0) {
+      container.innerHTML = '<p style="color: gray;">Оголошень не знайдено.</p>';
+      return;
+    }
+
+    ads.forEach((ad, index) => {
+      const card = document.createElement('div');
+      card.style.border = '1px solid #ccc';
+      card.style.borderRadius = '8px';
+      card.style.padding = '16px';
+      card.style.background = '#f9f9f9';
+      card.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+      card.style.cursor = 'pointer';
+      card.style.transition = '0.2s';
+      card.onmouseover = () => card.style.transform = 'scale(1.01)';
+      card.onmouseout = () => card.style.transform = 'scale(1)';
+      card.innerHTML = `
+        <h4 style="color: #007BFF; margin-bottom: 8px;">${ad.title}</h4>
+        <p><strong>📂 Категорія:</strong> ${ad.category}</p>
+        <p><strong>📝 Опис:</strong> ${ad.description}</p>
+        <p><strong>🔁 Обмін:</strong> ${ad.exchangeType}</p>
+        <p><strong>📌 Умови:</strong> ${ad.exchangeCondition}</p>
+        <p><small>📅 Дата: ${ad.createdAt}</small></p>
+        <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px;">
+          <button onclick='toggleFavourite(${JSON.stringify(ad)})'
+                  style="background: #ffc107; color: black; border: none; padding: 6px 10px; border-radius: 6px;">
+            ⭐ В обране
+          </button>
+          <button onclick='redirectToInteraction("${ad.exchangeCondition}", ${JSON.stringify(ad)})'
+                  style="background: #17a2b8; color: white; border: none; padding: 6px 10px; border-radius: 6px;">
+            💬 Взаємодія
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+</script>
+<script>
+  const favKey = 'favourite_ads';
+
+  function toggleFavourite(ad) {
+    let favs = JSON.parse(localStorage.getItem(favKey)) || [];
+    const existing = favs.find(f => f.title === ad.title && f.createdAt === ad.createdAt);
+    if (existing) {
+      favs = favs.filter(f => !(f.title === ad.title && f.createdAt === ad.createdAt));
+      alert('❌ Видалено з обраного');
+    } else {
+      favs.push(ad);
+      alert('✅ Додано до обраного');
+    }
+    localStorage.setItem(favKey, JSON.stringify(favs));
+  }
+
+  function redirectToInteraction(condition, ad) {
+    sessionStorage.setItem('interaction_draft', JSON.stringify(ad));
+
+    let sectionId = '';
+    switch (condition) {
+      case 'Безкоштовно':
+      case 'В дар':
+        sectionId = 'giftSection';
+        break;
+      case 'Бартер':
+      case 'На обмін':
+        sectionId = 'barterSection';
+        break;
+      case 'За Благочестя':
+        sectionId = 'blagoSection';
+        break;
+      default:
+        sectionId = 'messagesSection';
+        break;
+    }
+
+    closeAdFeed(); // Закриваємо вікно
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+    </details>
+
+  </main>
+
+  <footer>
+  © 2025 Родоварта | Зроблено з любов’ю та підтримкою від БО МБФ РОДОВАРТА |
+  <a href="https://rodovarta.github.io/web-rodovarata/" style="color:#FFD700; margin: 0 10px;">На головну</a> |
+  <a href="https://rodovarta.github.io/web-rodovarata/07_adminka.html" style="color:#FFD700;">Для адмінів</a>
+</footer>
+
+</body>
+</html>
